@@ -57,20 +57,73 @@
     //  modifier();
     //}
 
-    function App() {
-      let [counter, setCounter] = React.useState(0);
-      const onClick = () => {
-        //        setCounter(counter + 1);
-        setCounter((current) => current + 1);
-        //현재의 값을 기준으로 더하거나 빼기를 해야한다면 위에 사용한 코드보다 아래 사용한 코드를 사용하는 것이 더 안전하다.
-        //왜냐하면 아래 사용한 코드는 react에서 현재임을 보장하기 때문.
-      };
-      //useState(초기값,함수)
-      // console.log(data); // 출력시 [undefined, f]로 뜨는데 undefined는 data이고,f는 data를 바꿀 때 사용하는 함수이다.
+    function MinutesConvertor() {
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, setFlips] = React.useState(false);
+      function onChange(event) {
+        setAmount(event.target.value);
+      }
+      function reset() {
+        setAmount(0);
+      }
+
+      function flip() {
+        setFlips((current) => !current);
+        reset();
+      }
+
       return (
         <div>
-          <h3>total clicks:{counter}</h3>
-          <button onClick={onClick}>click me</button>
+          <div>
+            <h3>super Invertor</h3>
+            <h4>Minutes</h4>
+            <input
+              htmlFor="Minutes"
+              type="number"
+              value={!flipped ? amount : amount * 60}
+              onChange={onChange}
+              disabled={flipped === true}
+            />
+          </div>
+          <div>
+            <h4>hours</h4>
+            <input
+              htmlFor="hours"
+              placeholder="hours"
+              value={flipped ? amount : amount / 60}
+              type="number"
+              onChange={onChange}
+              disabled={flipped === false}
+            ></input>
+          </div>
+          <button onClick={reset}>reset</button>
+          <button onClick={flip}>flip</button>
+        </div>
+      );
+    }
+
+    function PyeongTometerSqure() {
+      return <div>pyeong</div>;
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState("xx");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+
+      return (
+        <div>
+          <div>
+            <h1>super convertor</h1>
+            <select value={index} onChange={onSelect}>
+              <option value="xx">select your units</option>
+              <option value="0">minutes&hours</option>
+              <option value="1">Pyeong&meterSqure</option>
+            </select>
+            {index === "0" ? <MinutesConvertor /> : null}
+            {index === "1" ? <PyeongTometerSqure /> : null}
+          </div>
         </div>
       );
     }
@@ -93,7 +146,7 @@
 
         function App() {
       let [counter, setCounter] = React.useState(0);
-      const onClick = () => { // onClick함수가 실행 될 때 
+      const onClick = () => { // onClick함수가 실행 될 때
          setCounter((current) => current + 1);
          //current는 counter변수에 들어간다.
         //현재의 값을 기준으로 더하거나 빼기를 해야한다면 위에 사용한 코드보다 아래 사용한 코드를 사용하는 것이 더 안전하다.
@@ -110,6 +163,9 @@
       );
     }
 
+
+    props : 부모 컴포넌트로부터 자식 컴포넌트에 데이터를 보낼 수 있게 해주는 방법
+    
     */
   </script>
 </html>

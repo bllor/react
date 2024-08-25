@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    function SaveBtn() {
+      return (
+        <button style={{ backgroundColor: "tomato" }}>Save Changes</button>
+      );
+    }
+
+    function confirmBtn() {
+      return <button>confirm</button>;
+    }
+
+    function Btn({ text, onClick }) {
+      return (
+        <button onClick={onClick} style={{ backgroundColor: "tomato" }}>
+          {text}
+        </button>
+      );
+    }
+
+    const MemorizedButton = React.memo(Btn);
+    Btn.propTypes = {
+      text: PropTypes.string,
+      //      text: PropTypes.string.isrequired, 이렇게 하면 무조건 가지고 있어야 한다.
+    };
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
+      return (
+        <div>
+          <MemorizedButton text={value} onClick={changeValue} />
+          <MemorizedButton text="continue" />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+    /*
+    props는  부모컴포넌트의 데이터 또는 함수를 자식 컴포넌트에 보낼 수 있다
+
+        function SaveBtn() {
+      return (
+        <button style={{ backgroundColor: "tomato" }}>Save Changes</button>
+      );
+        }
+
+        function Btn(props) {
+        console.log("props", props);
+        console.log("text", props.text);
+        return (
+            <button style={{ backgroundColor: "tomato" }}>Save Changes</button>
+        );
+        }
+
+        function App() {
+        return (
+            <div>
+            <Btn text="save Change" x="7" /> Btn 다음에 입력하는 값들은 props로 받을 수 있다.
+            </div>
+        );
+        }
+        text="~~"로 값을 보내면
+        만약 fuction Btn(text){
+            console.log(text)
+        }의 경우 ~~를 출력하지만
+
+        function Btn2(props){
+            console.log(props)  {text:~~} 로 출력된다.
+            
+        }
+
+        App()이 랜더링 될 때 모든 항목들이 랜더링 되는데 변화되지 않는 것들을 react memo를 통해 다시 랜더링 되는 것을 막을 수 있다.
+        const MemorizedButton = React.memo(Btn);
+        propsType은 props의 타입을 확인하여 잘못된 타입이 들어올 경우 오류를 얘기해준다.
+    */
+  </script>
+</html>
