@@ -1,0 +1,1 @@
+react는 웹페이지를 interactive하게 만들어준다.

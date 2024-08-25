@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    const span = React.createElement(
+      "span",
+      {
+        onMouseEnter: () => console.log("mouse enter"),
+      },
+      "hi"
+    );
+
+    function Title() {
+      return (
+        <h3 id="title" onMouseEnter={() => console.log("onMouseEnter")}>
+          Hi, React
+        </h3>
+      );
+    }
+
+    const title = (
+      <h3 id="title" onMouseEnter={() => console.log("onMouseEnter")}>
+        Hi, React
+      </h3>
+    );
+
+    const Button = () => (
+      <button
+        style={{ backgroundColor: "tomato" }}
+        onClick={() => console.log("clicked")}
+      >
+        click me
+      </button>
+    );
+
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("i'm clicked"),
+        style: {
+          backgroundColor: "tomato",
+        },
+      },
+      "click me"
+    );
+    //    const container = React.createElement("div", null, [title, Button]); // elements를 2개 같이 사용할 때는 배열안에 넣어야 한다.
+    let counter = 0;
+
+    //function clickup() {
+    //  counter += 1;
+    //  modifier();
+    //}
+
+    function App() {
+      let [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        //        setCounter(counter + 1);
+        setCounter((current) => current + 1);
+        //현재의 값을 기준으로 더하거나 빼기를 해야한다면 위에 사용한 코드보다 아래 사용한 코드를 사용하는 것이 더 안전하다.
+        //왜냐하면 아래 사용한 코드는 react에서 현재임을 보장하기 때문.
+      };
+      //useState(초기값,함수)
+      // console.log(data); // 출력시 [undefined, f]로 뜨는데 undefined는 data이고,f는 data를 바꿀 때 사용하는 함수이다.
+      return (
+        <div>
+          <h3>total clicks:{counter}</h3>
+          <button onClick={onClick}>click me</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+    //react는 어플리케이션을 interactive하게 만들어주는 라이브러리
+    //react-dom은 react element들을 html body에 둘 수 있도록 해준다.
+    //자바스크립트로 element를 만든 후 react에서 html로 만든다.
+    //createElements(tag,id|classname|event,content)
+    //jsx javascript의 확장판
+    // html에서 사용한 문법과 흡사한 문법을 사용한다.
+    //babel은 jsx를 react에서 코드를 해석할 수 있게 변경해준다.
+    //컴포넌트을 div태그에 넣으려면 함수로 만들어주어야 하고, 첫 글자는 반드시 대문자여야 한다.
+    //html요소라면 소문자로 작성한다.
+    /*
+    state : 데이터가 저장이 되는 곳
+    리엑트에는 ui에서 변경된 부분만 업데이트 해준다.
+    데이터가 변경될 때 reRender()와 같은 함수를 만들어서 업데이트를 해줄 수 있지만 좋은 방법이 아닌데
+    데이터가 변경될 때마다 전체를 리랜더링 시키기 때문
+
+
+        function App() {
+      let [counter, setCounter] = React.useState(0);
+      const onClick = () => { // onClick함수가 실행 될 때 
+         setCounter((current) => current + 1);
+         //current는 counter변수에 들어간다.
+        //현재의 값을 기준으로 더하거나 빼기를 해야한다면 위에 사용한 코드보다 아래 사용한 코드를 사용하는 것이 더 안전하다.
+        //왜냐하면 아래 사용한 코드는 react에서 현재임을 보장하기 때문.
+        setCounter함수가 변하면 리랜더링이 자동으로 된다.
+      };
+      //useState(초기값,함수)
+      // console.log(data); // 출력시 [undefined, f]로 뜨는데 undefined는 data이고,f는 data를 바꿀 때 사용하는 함수이다.
+      return (
+        <div>
+          <h3>total clicks:{counter}</h3>
+          <button onClick={onClick}>click me</button>
+        </div>
+      );
+    }
+
+    */
+  </script>
+</html>
