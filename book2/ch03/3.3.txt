@@ -1,0 +1,34 @@
+3.3props
+props는 properties를 줄인 표현으로 컴포넌트 속성을 설정할 때 사용하는 요소입니다.
+props 값은 해당 컴포넌트를 불러와 사용하는 부모 컴포넌트에서 설저알 수 있습니다.
+
+[1]기본값 설정하기
+컴포넌트명.defaultProps ={}하고 객체에 key, value로 넣을 경우 해당 key는 컴포넌트의 기본 값이 됩니다
+[2]태그 사이의 내용을 보여주는 children
+<MyComponent>안녕</MyComponent>
+[MyComponent.js]
+const MyComponent = props =>{
+    return(
+        children값은 props.children입니다.
+    )
+}
+children값은 안녕입니다로
+컴포넌트 태그 사이의 내용은 children으로 받아서 사용할 수 있습니다.
+[3]propTypes를 이용한 props 검증
+컴포넌트의 필수 props를 지정하거나 props의 타입을 지정할 때는 propTypes를 사용합니다
+propTypes사용방법
+[1]import propTypes form 'prop-types'로 불러옴
+[2]컴포넌트명.propTypes = {}로 객체에 props의 이름과 타입을 지정해 줍니다.
+ex)
+MyComponent.propTypes = {
+    name:propTypes.string
+}
+이름이 string으로 들어와야 하고, 만약 다른 타입으로 들어올 경우 오류가 발생합니다.
+isRequired를 사용하여 필수 propTypes를 설정할 수 있습니다
+MyComponent.propTypes = {
+    name:propTypes.string
+    favoriteNumber: propTypes.number.isRequired
+}
+favoriteNumber의 값이 넘어오지 않을 경우 오류를 발생합니다.
+propTypes와 defaultProps는 컴포넌트의 필수 사항은 아니지만 협업 시 해당 컴포넌트에 어떤 props가 필요한지 알 수 있어 개발 능률이 오를 겁니다.
+
