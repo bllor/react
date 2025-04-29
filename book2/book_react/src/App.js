@@ -1,12 +1,9 @@
 import "./App.css";
+import Counter from "./Counter_class";
 import MyComponent from "./MyComponent";
 
 function App() {
-  return (
-    <MyComponent name="React" favoriteNumber={45}>
-      태그사이
-    </MyComponent>
-  );
+  return <Counter></Counter>;
 }
 
 export default App;
